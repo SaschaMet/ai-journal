@@ -1,0 +1,43 @@
+{
+  "name": "ai-journal",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.3.14",
+  "scripts": {
+    "dev": "bun --hot src/server.ts",
+    "build": "bun build --target=bun --production --outdir=dist ./src/server.ts",
+    "start": "cd dist && bun --env-file ../.env server.js",
+    "typecheck": "bun --bun tsc --noEmit",
+    "test": "bun test",
+    "audit": "bun audit",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "test:coverage": "bun test --coverage --coverage-reporter=lcov --coverage-reporter=text",
+    "mutation": "bun run scripts/run-mutation-critical.ts",
+    "security:secrets": "bun run scripts/check-secrets.ts",
+    "guard:ai-risk": "bun run scripts/check-ai-risk.ts",
+    "guard:changed-coverage": "bun run scripts/check-changed-line-coverage.ts",
+    "guard:cleanup": "bun run scripts/check-cleanup.ts",
+    "docs:comments": "bun run scripts/check-doc-comments.ts",
+    "dup:check": "jscpd --config .jscpd.json",
+    "check:fast": "./scripts/run-coding-standard.sh --mode fast",
+    "check:full": "./scripts/run-coding-standard.sh --mode full",
+    "check:ci": "./scripts/run-coding-standard.sh --mode ci --strict"
+  },
+  "dependencies": {
+    "@fontsource-variable/newsreader": "^5.2.10",
+    "date-fns": "4.3.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.16",
+    "@types/bun": "1.3.14",
+    "@types/react": "19.2.15",
+    "@types/react-dom": "19.2.3",
+    "jscpd": "^5.0.10",
+    "typescript": "6.0.3"
+  }
+}

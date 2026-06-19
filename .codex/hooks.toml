@@ -1,0 +1,29 @@
+[features]
+hooks = true
+
+[[hooks.PreToolUse]]
+matcher = "Bash"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = ".github/hooks/scripts/block-env-read.sh"
+timeout = 20
+statusMessage = "Checking .env guard"
+
+[[hooks.PreToolUse]]
+matcher = "Read|Grep|LS|Glob|Edit|Write|MultiEdit"
+
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = ".github/hooks/scripts/block-env-read.sh"
+timeout = 20
+statusMessage = "Checking .env guard"
+
+[[hooks.Stop]]
+matcher = ".*"
+
+[[hooks.Stop.hooks]]
+type = "command"
+command = ".github/hooks/scripts/lint-on-session-end.sh"
+timeout = 300
+statusMessage = "Running session-end lint"
