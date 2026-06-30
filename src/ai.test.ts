@@ -44,7 +44,9 @@ describe("LM Studio integration", () => {
       model: "lmstudio-community/qwen2.5-7b-instruct",
     } satisfies LocalModelSettings);
 
-    expect(capturedRequests[0]?.url).toBe("http://127.0.0.1:1234/v1/models");
+    expect(capturedRequests[0]?.url).toBe(
+      `${new URL(DEFAULT_LM_STUDIO_BASE_URL).origin}/v1/models`,
+    );
   });
 
   test("requests structured prompt output from LM Studio", async () => {
@@ -84,7 +86,9 @@ describe("LM Studio integration", () => {
       ],
     });
 
-    expect(capturedRequests[0]?.url).toBe("http://127.0.0.1:1234/v1/chat/completions");
+    expect(capturedRequests[0]?.url).toBe(
+      `${new URL(DEFAULT_LM_STUDIO_BASE_URL).origin}/v1/chat/completions`,
+    );
     const requestBody = parseRequestBody(capturedRequests[0]);
     expect(requestBody.response_format.type).toBe("json_schema");
     expect(requestBody.response_format.json_schema.name).toBe("guiding_prompts");
